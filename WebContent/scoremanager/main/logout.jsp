@@ -6,7 +6,7 @@
     <c:param name="scripts"></c:param>
 	<c:param name = "content">
 		<section class = "mp-4">
-			<h2 class="h2 fw-normal bg-secondary bg-opacity-10 py-2 px-4 mb-0">ログアウト</h2>
+			<h2 class="h2 fw-normal bg-secondary bg-opacity-10 py-2 px-4 mb-0"><b>ログアウト</b></h2>
 			<p class="h2 fw-normal bg-opacity-10 py-2 px-4 mb-0" style="text-align: center; background-color: lightgreen; font-size: small;">ログアウトしました</p>
 			<br>
 			<a href = "/Score_Management/scoremanager/Login.action">ログイン</a>

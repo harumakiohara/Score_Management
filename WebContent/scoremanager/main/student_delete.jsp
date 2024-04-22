@@ -5,7 +5,7 @@
     <c:param name="scripts"></c:param>
     <c:param name="content">
         <section class="mp-4">
-            <h2 class="h2 fw-normal bg-secondary bg-opacity-10 py-2 px-4 mb-0">学生情報削除</h2>
+            <h2 class="h2 fw-normal bg-secondary bg-opacity-10 py-2 px-4 mb-0"><b>学生情報削除</b></h2>
 			<p class="h2 fw-normal bg-opacity-10 py-2 px-4 mb-0" style="text-align: center; background-color: lightgreen; font-size: small;">学生情報を削除しますか？</p>
             <!-- 戻るボタン -->
             <a href="StudentList.action">戻る</a>

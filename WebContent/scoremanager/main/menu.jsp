@@ -1,16 +1,31 @@
-<%@page language = "java" contentType="text/html; charset=UTF-8" %>
+<%@page language="java" contentType="text/html; charset=UTF-8"%>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <c:import url="/common/base.jsp">
-    <c:param name="title" value="得点管理システム" />
+	<c:param name="title" value="得点管理システム" />
 
-    <c:param name="scripts"></c:param>
-	<c:param name = "content">
-		<section class = "mp-4">
-			<h2 class="h2 fw-normal bg-secondary bg-opacity-10 py-2 px-4 mb-0">メニュー</h2>
+	<c:param name="scripts"></c:param>
+	<c:param name="content">
+		<section class="mp-4">
+			<h2 class="h2 fw-normal bg-secondary bg-opacity-10 py-2 px-4 mb-0"><b>メニュー</b></h2>
 			<br>
-			<div class="col d-flex align-items-center justify-content-center mx-2 rounded shadow"
-			 style="height: 10rem; background-color: #dbb;">
-			<a href = "StudentList.action">学生管理</a>
+			<div class="d-flex justify-content-center">
+				<div
+					class="col d-flex align-items-center justify-content-center mx-2 rounded shadow"
+					style="height: 10rem; background-color: #dbb;">
+					<a href="StudentList.action">学生管理</a>
+				</div>
+
+				<div
+					class="col d-flex flex-column align-items-center justify-content-center mx-2 rounded shadow"
+					style="height: 10rem; background-color: #CCFFCC;">
+					成績管理 <a href="#">成績登録</a> <a href="#">成績参照</a>
+				</div>
+
+				<div
+					class="col d-flex align-items-center justify-content-center mx-2 rounded shadow"
+					style="height: 10rem; background-color: #CCCCFF;">
+					<a href="#">科目管理</a>
+				</div>
 			</div>
 		</section>
 	</c:param>

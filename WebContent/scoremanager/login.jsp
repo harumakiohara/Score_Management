@@ -24,7 +24,7 @@
     </c:param>
     <c:param name="content">
         <div class="row border mx-3 py-2 align-items-center rounded" id="fillter">
-            <h2 class="h2 fw-normal bg-secondary bg-opacity-10 py-0 px-4 mb-3" style="text-align: center;">ログイン</h2>
+            <h2 class="h2 fw-normal bg-secondary bg-opacity-10 py-0 px-4 mb-3" style="text-align: center;"><b>ログイン</b></h2>
             <% if (request.getAttribute("errors") != null) { %>
     				<ul style="text-align: center; list-style: none; padding-left: 0;">
         		<% for (String error : (List<String>) request.getAttribute("errors")) { %>
