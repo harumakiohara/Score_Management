@@ -288,13 +288,13 @@ public class StudentDao extends Dao {
     public boolean delete(String studentNo) throws Exception {
         Connection connection = getConnection();
         PreparedStatement statement = null;
-        int count = 0;
+        int count=0;
 
         try {
-            statement = connection.prepareStatement("DELETE FROM student WHERE no = ?");
+            statement=connection.prepareStatement("update student set deleted=false");
             statement.setString(1, studentNo);
 
-            count = statement.executeUpdate();
+            count=statement.executeUpdate();
         } catch (Exception e) {
             throw e;
         } finally {
@@ -314,7 +314,7 @@ public class StudentDao extends Dao {
             }
         }
 
-        return count > 0;
+        return count>0;
     }
 
     public boolean exists(String studentNo, String schoolCd) {
