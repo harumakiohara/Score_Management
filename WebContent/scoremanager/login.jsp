@@ -4,7 +4,7 @@
 <%@ page import="java.util.ArrayList"%>
 <%@ page import="java.util.List"%>
 <c:import url="/common/base.jsp">
-    <c:param name="title" value="ログイン" />
+    <c:param name="title" value="得点管理システム" />
     <c:param name="scripts">
         <script>
             // パスワード表示のトグル機能
