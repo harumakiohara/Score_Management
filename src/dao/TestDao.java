@@ -23,7 +23,7 @@ public class TestDao extends Dao{
 
 
 	    try {
-	        statement = connection.prepareStatement("select * from test where student_no=? and subject_no and school_cd=? and no=?");
+	        statement = connection.prepareStatement(baseSql+"student_no=? and subject_no and school_cd=? and no=?");
 	        statement.setString(1, student.getNo());
 	        statement.setString(2, subject.getCd());
 	        statement.setString(3, school.getCd());
@@ -67,13 +67,11 @@ public class TestDao extends Dao{
 	    return test;
 	}
 
-	private List<Test> postFilter(ResultSet rSet, School school) throws Exception {
-	    List<Test> list = new ArrayList<>();
+	private Test postFilter(ResultSet rSet, School school) throws Exception {
+        Test test = new Test();
 	    StudentDao studentDao=new StudentDao();
 	    SubjectDao subjectDao=new SubjectDao();
 	    try {
-	        while (rSet.next()) {
-	            Test test = new Test();
 	            test.setNo(rSet.getInt("no"));
 	            test.setClassNum(rSet.getString("class_num"));
 	            test.setPoint(rSet.getInt("point"));
@@ -81,8 +79,6 @@ public class TestDao extends Dao{
 	            test.setStudent(studentDao.get(rSet.getString("student_no")));
 	            test.setSchool(school);
 	            test.setSubject(subjectDao.get(rSet.getString("subject_no"), school));
-	            list.add(test);
-	        }
 	    } catch (SQLException | NullPointerException e) {
 	        e.printStackTrace();
 	        // エラーログの出力を行う場合、適切に処理を行います
@@ -95,27 +91,31 @@ public class TestDao extends Dao{
 	            }
 	        }
 	    }
-	    return list;
+	    return test;
 	}
 
 
 	public List<Test> filter(int entYear, String classNum,Subject subject,int num,School school) throws Exception {
 	    List<Test> list = new ArrayList<>();
 	    List<Student> slist=new ArrayList<>();
+	    StudentDao stDao=new StudentDao();
 	    Connection connection = getConnection();
 	    PreparedStatement statement = null;
 	    ResultSet rSet = null;
-	    String studentSearch="select * from student where ent_year=? and class_num=?";
- 	    String condition = "and ent_year = ? and class_num = ?";
-	    String order = "order by no asc";
 
 	    try {
-	        statement = connection.prepareStatement(baseSql + condition + order);
-	        statement.setString(1, school.getCd());
-	        statement.setInt(2, entYear);
-	        statement.setString(3, classNum);
-	        rSet = statement.executeQuery();
-	        list = postFilter(rSet, school);
+	    	slist=stDao.filter(school, entYear, classNum, true);
+	    	for(Student st:slist){
+	    		statement=connection.prepareStatement(baseSql+"student_no=? subject_cd=? and school_cd=? and no=? and class_num=?");
+	    		statement.setString(1, st.getNo());
+		        statement.setString(2, subject.getCd());
+		        statement.setString(3, school.getCd());
+		        statement.setString(4, ""+num);
+		        statement.setString(5, classNum);
+		        rSet=statement.executeQuery();
+		        Test result=postFilter(rSet,school);
+		        list.add(result);
+	    	}
 	    } catch (Exception e) {
 	        throw e;
 	    } finally {
