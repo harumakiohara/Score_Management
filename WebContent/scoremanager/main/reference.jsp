@@ -9,7 +9,7 @@
 				<b>成績参照</b>
 			</h2>
 			<form method="get">
-				<div class="row border mx-6 mb-6 py-3 align-items-center rounded"
+				<div class="row border mx-5 mb-6 py-3 align-items-center rounded"
 					id="filter">
 
 					科目情報
@@ -49,18 +49,18 @@
 					<!-- Horizontal line -->
 					<!-- Content below the line -->
 
-					学生情報
-					<div class="col-5">
-						<label class="form-label" for="student-f4-input">学生番号</label> <input
-							class="form-control" type="text" id="student-f4-input" name="f4"
-							placeholder="学生番号を入力してください" value="${f4}">
+						学生情報<div class="col-5"><label class="form-label" for="student-f4-input">学生番号</label>
+						<input class="form-control" type="text" id="student-f4-input"
+							name="f4" placeholder="学生番号を入力してください" value="${f4}">
+
 
 					</div>
 					<div class="col-2">
 						<button class="btn btn-secondary" id="filter-button">検索</button>
 					</div>
 				</div>
-				<font color="#00FFFF">科目情報を選択または学生情報を入力して検索ボタンをクリックしてください</font>
+				<p>
+					<font color="#00FFFF">科目情報を選択または学生情報を入力して検索ボタンをクリックしてください</font></p>
 			</form>
 		</section>
 	</c:param>
