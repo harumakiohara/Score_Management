@@ -9,6 +9,14 @@ public class Student implements Serializable {
 	private String classNum;
 	private boolean isAttend;
 	private School school;
+	private boolean deleted=false;
+
+	public boolean isDeleted() {
+		return deleted;
+	}
+	public void setDeleted(boolean deleted) {
+		this.deleted = deleted;
+	}
 	public String getNo() {
 		return no;
 	}

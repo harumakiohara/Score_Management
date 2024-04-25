@@ -10,7 +10,7 @@ import java.util.List;
 import bean.School;
 import bean.Student;
 public class StudentDao extends Dao {
-	private String baseSql = "select * from student where school_cd=?";
+	private String baseSql = "select * from student where school_cd=? and deleted=false";
 
 	public Student get(String no) throws Exception {
 	    Student student = new Student();
@@ -20,7 +20,7 @@ public class StudentDao extends Dao {
 
 
 	    try {
-	        statement = connection.prepareStatement("select * from student where no = ?");
+	        statement = connection.prepareStatement("select * from student where no = ? and deleted=false");
 	        statement.setString(1, no);
 	        rSet = statement.executeQuery();
 	        SchoolDao schoolDao = new SchoolDao();
@@ -240,7 +240,7 @@ public class StudentDao extends Dao {
     		Student old = get(student.getNo());
     		if (old == null) {
     			statement = connection.prepareStatement(
-    					"insert into student(no, name, ent_year, class_num, is_attend, school_cd) VALUES (?, ?, ?, ?, ?, ?)");
+    					"insert into student(no, name, ent_year, class_num, is_attend, school_cd, deleted) VALUES (?, ?, ?, ?, ?, ?,false)");
     			statement.setString(1,  student.getNo());
     			statement.setString(2, student.getName());
     			statement.setInt(3,  student.getEntYear());
@@ -291,7 +291,7 @@ public class StudentDao extends Dao {
         int count=0;
 
         try {
-            statement=connection.prepareStatement("update student set deleted=false where student_no=?");
+            statement=connection.prepareStatement("update student set deleted=true where student_no=?");
             statement.setString(1, studentNo);
 
             count=statement.executeUpdate();
@@ -318,7 +318,7 @@ public class StudentDao extends Dao {
     }
 
     public boolean exists(String studentNo, String schoolCd) {
-        String sql = "SELECT COUNT(*) FROM student WHERE no = ? AND school_cd = ?";
+        String sql = "SELECT COUNT(*) FROM student WHERE no = ? AND school_cd = ? and deleted=false;";
         try (
             Connection conn = getConnection();
             PreparedStatement pstmt = conn.prepareStatement(sql);
