@@ -3,6 +3,8 @@ package scoremanager.main;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import bean.Student;
+import dao.StudentDao;
 import tool.Action;
 
 public class StudentDeleteAction extends Action {
@@ -12,8 +14,10 @@ public class StudentDeleteAction extends Action {
         // 学生の学籍番号を取得
         String no = request.getParameter("no");
 
-        // クラス番号のリストをリクエストスコープに設定
-        request.setAttribute("no", no);
+        StudentDao studentDao = new StudentDao();
+        Student student = studentDao.get(no);
+
+        request.setAttribute("student", student);
 
         // 更新ページにフォワード
         request.getRequestDispatcher("student_delete.jsp").forward(request, response);
