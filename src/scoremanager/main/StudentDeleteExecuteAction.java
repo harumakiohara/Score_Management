@@ -2,23 +2,37 @@ package scoremanager.main;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
-import tool.Action;
-
+import bean.Student;
+import bean.Teacher;
 import dao.StudentDao;
+import tool.Action;
 
 public class StudentDeleteExecuteAction extends Action {
 
     @Override
     public void execute(HttpServletRequest req, HttpServletResponse res) throws Exception {
-        // 学生番号を取得
-        String studentNo = req.getParameter("no");
+    	HttpSession session = req.getSession();
+        Teacher teacher = (Teacher) session.getAttribute("user");
+        String schoolCd = teacher.getSchoolCdAsString();
 
-        // 学生データを削除
-        StudentDao sDao = new StudentDao();
-        sDao.delete(studentNo);
+		// リクエストパラメータから学生情報を取得
+		Student student = new Student();
+		student.setEntYear(Integer.parseInt(req.getParameter("entyear")));
+		student.setNo(req.getParameter("no"));
+		student.setName(req.getParameter("name"));
+		student.setClassNum(req.getParameter("classnum"));
 
-        // 削除の結果を通知するページにフォワード
-        req.getRequestDispatcher("student_delete_done.jsp").forward(req, res);
+		// 在学中の情報を取得
+		String deletedParam = req.getParameter("deleted");
+		boolean deleted = "true".equals(deletedParam);
+		student.setAttend(deleted);
+
+		// 学生情報をデータベースに保存
+		new StudentDao().save(student, schoolCd);
+
+		// 処理完了を通知するページにフォワード
+		req.getRequestDispatcher("student_delete_done.jsp").forward(req, res);
     }
 }
