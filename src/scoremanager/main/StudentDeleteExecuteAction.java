@@ -27,7 +27,7 @@ public class StudentDeleteExecuteAction extends Action {
 		// 在学中の情報を取得
 		String deletedParam = req.getParameter("deleted");
 		boolean deleted = "true".equals(deletedParam);
-		student.setAttend(deleted);
+		student.setDeleted(deleted);
 
 		// 学生情報をデータベースに保存
 		new StudentDao().save(student, schoolCd);
