@@ -10,8 +10,8 @@ import java.util.List;
 import bean.School;
 import bean.Student;
 public class StudentDao extends Dao {
-	private String baseSql = "select * from student where school_cd=? and deleted=false";
-
+	private String baseSql = "select * from student where school_cd=?";
+//	select * from student where school_cd=? and deleted=false
 	public Student get(String no) throws Exception {
 	    Student student = new Student();
 	    Connection connection = getConnection();
@@ -20,7 +20,8 @@ public class StudentDao extends Dao {
 
 
 	    try {
-	        statement = connection.prepareStatement("select * from student where no = ? and deleted=false");
+	        statement = connection.prepareStatement("select * from student where no = ?");
+//	        select * from student where no = ? and deleted=false
 	        statement.setString(1, no);
 	        rSet = statement.executeQuery();
 	        SchoolDao schoolDao = new SchoolDao();

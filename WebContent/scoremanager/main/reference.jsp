@@ -55,9 +55,6 @@
 							class="form-control" type="text" id="student-f4-input" name="f4"
 							placeholder="学生番号を入力してください" value="${f4}" required>
 
-
-
-
 					</div>
 					<div class="col-2">
 						<button class="btn btn-secondary" id="filter-button">検索</button>
