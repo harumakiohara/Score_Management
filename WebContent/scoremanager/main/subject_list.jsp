@@ -10,26 +10,31 @@
 				<a href="SubjectCreate.action">新規登録</a>
 			</div>
 			<table class="table table-hover">
-				<tr>
-					<th>科目コード</th>
-					<th>科目名</th>
-				</tr>
+				<thead>
+					<tr>
+						<th>科目コード</th>
+						<th>科目名</th>
+						<th></th>
+						<!-- 変更と削除のための空の列を追加 -->
+						<th></th>
+						<!-- 変更と削除のための空の列を追加 -->
+					</tr>
+				</thead>
+				<tbody>
+					<c:choose>
+						<c:when test="${not empty subjects}">
+							<c:forEach var="subject" items="${subjects}">
+								<tr>
+									<td><c:if test="${not empty subject.cd}">${subject.cd}</c:if></td>
+									<td><c:if test="${not empty subject.name}">${subject.name}</c:if></td>
+									<td><a href="SubjectUpdate.action?cd=${subject.cd}">変更</a></td>
+									<td><a href="SubjectDelete.action?cd=${subject.cd}">削除</a></td>
+								</tr>
+							</c:forEach>
+						</c:when>
+					</c:choose>
+				</tbody>
 			</table>
-
-			<c:choose>
-				<c:when test="${not empty subjects}">
-					<table class="table table-hover">
-						<c:forEach var="subject" items="${subjects}">
-							<tr>
-								<td><c:if test="${not empty subject.cd}">${subject.cd}</c:if></td>
-								<td><c:if test="${not empty subject.name}">${subject.name}</c:if></td>
-								<td><a href="SubjectUpdate.action?cd=${subject.cd}">変更</a></td>
-								<td><a href="SubjectDelete.action?cd=${subject.cd}">削除</a></td>
-							</tr>
-						</c:forEach>
-					</table>
-				</c:when>
-			</c:choose>
 		</section>
 	</c:param>
 </c:import>
